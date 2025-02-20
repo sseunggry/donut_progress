@@ -12,30 +12,22 @@
   margin-left: auto;
 }
 .header .btn-head-progress {
-  width: 80px;
-  height: 80px;
-  background-color: #fff;
-  border-radius: 50%;
-  border: 12px solid #000;
-}
-
-.btn-progress {
   display: block;
-  width: 340px;
-  height: 340px;
+  width: 40px;
+  height: 40px;
 }
-.btn-progress svg {
+.header .btn-head-progress svg {
   width: 100%;
   height: 100%;
-  transform: rotate(-80deg);
+  transform: rotate(-90deg);
 }
-.btn-progress svg .circle {
-  stroke: #ebebeb;
-  stroke-width: 20px;
+.header .btn-head-progress svg .circle {
+  stroke: #bbb;
+  stroke-width: 12px;
 }
-.btn-progress svg .bar {
+.header .btn-head-progress svg .bar {
   stroke: #000;
-  stroke-width: 20px;
+  stroke-width: 12px;
   stroke-linecap: round;
   stroke-linejoin: round;
 }

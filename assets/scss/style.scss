@@ -23,11 +23,26 @@
         margin-left: auto;
     }
     .btn-head-progress{
-        width: 80px;
-        height: 80px;
-        background-color: #fff;
-        border-radius: 50%;
-        border: 12px solid #000;
+        display: block;
+        width: 40px;
+        height: 40px;
+
+        svg{
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+
+            .circle{
+                stroke: #bbb;
+                stroke-width: 12px;
+            }
+            .bar{
+                stroke: #000;
+                stroke-width: 12px;
+                stroke-linecap: round; 
+                stroke-linejoin: round;
+            }
+        }
     }
 }
 
@@ -70,26 +85,3 @@
 //         }
 //     }
 // }
-
-.btn-progress{
-    display: block;
-    width: 340px;
-    height: 340px;
-
-    svg{
-        width: 100%;
-        height: 100%;
-        transform: rotate(-80deg);
-
-        .circle{
-            stroke: #ebebeb;
-            stroke-width: 20px;
-        }
-        .bar{
-            stroke: #000;
-            stroke-width: 20px;
-            stroke-linecap: round; 
-            stroke-linejoin: round;
-        }
-    }
-}
