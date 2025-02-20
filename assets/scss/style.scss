@@ -1,0 +1,95 @@
+@charset "UTF-8";
+@import "./util";
+
+//css 속성 선언 순서
+// 1. 레이아웃  (overflow, display, position, top, right, bottom, left, z-index)
+// 2. box (margin, padding, width, height, border)
+// 3. 배경 (background)
+// 4. 폰트 (font, color, letter-spacing, text-align, text-decoration, text-indent, vertical-align, white-space)
+// 5. 기타 (위에 언급되지 않은 나머지 속성들, 폰트의 관련 속성 이후에 선언하며, 기타 속성 내의 선언 순서는 무관함)
+
+
+.header{
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    width: 100%;
+    height: 200px;
+    .logo{
+        font-size: 50px;
+    }
+
+    .head-right{
+        margin-left: auto;
+    }
+    .btn-head-progress{
+        width: 80px;
+        height: 80px;
+        background-color: #fff;
+        border-radius: 50%;
+        border: 12px solid #000;
+    }
+}
+
+// .btn-progress{
+//     svg{
+//         width: 300px;
+//         height: 300px;
+
+//         .circle{
+//             fill: #DFEEDB;
+//         }
+//         .bar{
+//             fill: #A6D997;
+//         }
+//     }
+// }
+
+// .btn-progress2{
+//     position: relative;
+//     display: inline-block;
+//     width: 400px;
+//     height: 400px;
+
+//     .circle{
+//         position: absolute;
+//         display: inline-block;
+//         width: 100%;
+//         height: 100%;
+//         // background-color: #000;
+//         border-radius: 50%;
+//         border: 57px solid #000;
+//     }
+//     svg{
+//         position: relative;
+//         width: 100%;
+//         height: 100%;
+//         z-index: 2;
+//         .bar{
+//             fill: #A6D997;
+//         }
+//     }
+// }
+
+.btn-progress{
+    display: block;
+    width: 340px;
+    height: 340px;
+
+    svg{
+        width: 100%;
+        height: 100%;
+        transform: rotate(-80deg);
+
+        .circle{
+            stroke: #ebebeb;
+            stroke-width: 20px;
+        }
+        .bar{
+            stroke: #000;
+            stroke-width: 20px;
+            stroke-linecap: round; 
+            stroke-linejoin: round;
+        }
+    }
+}

@@ -1,0 +1,41 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  width: 100%;
+  height: 200px;
+}
+.header .logo {
+  font-size: 50px;
+}
+.header .head-right {
+  margin-left: auto;
+}
+.header .btn-head-progress {
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 12px solid #000;
+}
+
+.btn-progress {
+  display: block;
+  width: 340px;
+  height: 340px;
+}
+.btn-progress svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-80deg);
+}
+.btn-progress svg .circle {
+  stroke: #ebebeb;
+  stroke-width: 20px;
+}
+.btn-progress svg .bar {
+  stroke: #000;
+  stroke-width: 20px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

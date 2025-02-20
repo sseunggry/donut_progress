@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="format-detection" content="telephone=no" />
+        <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/favicon_180.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="../assets/img/favicon_512.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="../assets/img/favicon_192.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon_32.png" />
+        <title>index</title>
+        <!-- css -->
+        <link href="../assets/css/common.css" type="text/css" rel="stylesheet" />
+        <link href="../assets/css/style.css" type="text/css" rel="stylesheet" />
+        <!-- script -->
+        <script defer src="../assets/js/jquery-2.2.4.min.js"></script>
+        <script defer src="../assets/js/swiper-bundle.min.js"></script>
+        <script defer src="../assets/js/common.js"></script>
+    </head>
+
+    <body>
+        <div class="wrap">
+			<!-- 헤더 영역 -->
+			<header class="header">
+				<h1 class="logo">
+					<a href="#!">logo</a>
+				</h1>
+                <div class="head-right">
+                    <button class="btn-head-progress">
+                        <i></i>
+                        <span class="sr-only">진행현황</span>
+                    </button>
+                </div>
+			</header>
+			<!-- //헤더 영역 -->
+
+            <!-- 컨테이너 영역 -->
+            <div id="container">
+				<!-- visual -->
+				<section class="section visual">
+                    <button class="btn-progress" data-progress="2/6">
+                        <svg viewBox="0 0 100 100">
+                            <circle class="circle" cx="50" cy="50" r="40" fill="none"></circle>
+                            <path class="bar" fill="none" d=""></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- <path class="bar" fill="none" d="M 50 10 A 40 40, 0, 0, 0, 10 50"></path> -->
+                    <!-- 
+                        cx, cy => 원 위치 : (width + stroke-width) / 2
+                        r => 원 지름 : (width - stroke-width) / 2
+
+                        cx, cy => 원 위치 : viewBox / 2
+                        r => 원 지름 : (viewBox - stroke-width) / 2
+                     -->
+                    <!-- strokeDasharray={`${2 * Math.PI * 90 * percent} ${2 * Math.PI * 90 * (1 - percent) }`} 
+                                strokeDashoffset={2 * Math.PI * 90 * 0.25} -->
+
+
+                    <!-- <button class="btn-progress2">
+                        <span class="circle"></span>
+                        <svg viewBox="0 0 176 176" fill="none">
+                            <path class="bar" d="M75.6375 13C75.6375 6.1723 81.1725 0.63736 88.0002 0.63736C136.249 0.63736 175.363 39.7509 175.363 88C175.363 136.249 136.249 175.363 88.0002 175.363C60.9075 175.363 36.6879 163.015 20.6832 143.687C16.3287 138.428 17.0618 130.635 22.3207 126.28C27.5796 121.926 35.3728 122.659 39.7273 127.918C51.2361 141.817 68.5826 150.637 88.0002 150.637C122.594 150.637 150.638 122.594 150.638 88C150.638 53.4063 122.594 25.3626 88.0002 25.3626C81.1725 25.3626 75.6375 19.8277 75.6375 13Z" />
+                        </svg>
+                    </button>
+
+                    <button class="btn-progress">
+                        <svg viewBox="0 0 176 176" fill="none">
+                            <path class="circle" d="M87.9998 25.3626C53.4062 25.3626 25.3625 53.4063 25.3625 88C25.3625 122.594 53.4062 150.637 87.9998 150.637C122.594 150.637 150.637 122.594 150.637 88C150.637 53.4063 122.594 25.3626 87.9998 25.3626ZM0.637207 88C0.637207 39.7509 39.7508 0.63736 87.9998 0.63736C136.249 0.63736 175.362 39.7509 175.362 88C175.362 136.249 136.249 175.363 87.9998 175.363C39.7508 175.363 0.637207 136.249 0.637207 88Z"/>
+                            <path class="bar" d="M75.6375 13C75.6375 6.1723 81.1725 0.63736 88.0002 0.63736C136.249 0.63736 175.363 39.7509 175.363 88C175.363 136.249 136.249 175.363 88.0002 175.363C60.9075 175.363 36.6879 163.015 20.6832 143.687C16.3287 138.428 17.0618 130.635 22.3207 126.28C27.5796 121.926 35.3728 122.659 39.7273 127.918C51.2361 141.817 68.5826 150.637 88.0002 150.637C122.594 150.637 150.638 122.594 150.638 88C150.638 53.4063 122.594 25.3626 88.0002 25.3626C81.1725 25.3626 75.6375 19.8277 75.6375 13Z" />
+                        </svg>
+                    </button>
+
+                    <svg class="svg" viewBox="0 0 400 250">
+                        <g>
+                            <circle cx="0" cy="0" r="105" stroke="hsla(0, 0%, 0%, 0.08)" stroke-width="10" stroke-linecap="round" stroke-dasharray="620" stroke-dashoffset="0" fill="none"></circle>
+                        </g>
+                        <g>
+                            <path d="M70.73560374525823,77.59815953225831A105,105,0,1,1,-8.904200677833161,-104.62177216186349A105,105,0,1,0,70.73560374525823,77.59815953225831Z" fill="none" stroke="#F9BA00" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="659.4" stroke-dashoffset="659.4"></path>
+                        </g>
+                    </svg> -->
+				</section>
+				<!-- //visual -->
+            </div>
+            <!--// 컨테이너 영역 -->
+        </div>
+    </body>
+</html>
+
+<!-- <circle cx="0" cy="0" r="105" 
+    transform="rotate(-90)" fill="none" 
+    stroke="hsla(0, 0%, 0%, 0.08)" 
+    stroke-width="10" 
+    stroke-linecap="round" 
+    stroke-dasharray="659.4" 
+    stroke-dashoffset="0"
+>
+    stroke-linecap="round"
+    stroke-linejoin="round"
+</circle> -->
