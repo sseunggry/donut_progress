@@ -85,3 +85,17 @@
 //         }
 //     }
 // }
+.acc-intro-swiper{
+    padding: 40px;
+    .slider{
+        position: relative;
+        overflow: hidden;
+    }
+    .txt{
+        font-size: 24px;
+        font-weight: 700;
+    }
+    .swiper-pagination{
+        bottom: 0;
+    }
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+        <title>swiper+lottie</title>
+        <!-- css -->
+        <link href="./assets/css/swiper-bundle.min.css" type="text/css" rel="stylesheet" />
+        <link href="./assets/css/common.css" type="text/css" rel="stylesheet" />
+        <link href="./assets/css/style.css" type="text/css" rel="stylesheet" />
+        <!-- script -->
+        <script defer src="./assets/js/jquery-2.2.4.min.js"></script>
+        <script defer src="./assets/js/swiper-bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.10/lottie.min.js"></script>
+        <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> -->
+        <script defer src="./assets/js/common.js"></script>
+    </head>
+
+    <body>
+        <div class="wrap">
+            <!-- 컨테이너 영역 -->
+            <div id="container">
+				<section class="section">
+                    <div class="acc-intro-swiper">
+                        <div class="ui-slide-wrap">
+                            <div class="slider">
+                                <div class="ui-slide-item-wrap swiper-wrapper">
+                                    <div class="ui-slide-item swiper-slide">
+                                        <div class="slide-box">
+                                            <p class="txt">
+                                                스와이퍼1
+                                            </p>
+                                            <div class="ico-area fn-ani-set" data-ani-item="sl-acc-begin1"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ui-slide-item swiper-slide">
+                                        <div class="slide-box">
+                                            <p class="txt">
+                                                스와이퍼2
+                                            </p>
+                                            <div class="ico-area fn-ani-set" data-ani-item="sl-acc-begin2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ui-slide-item swiper-slide">
+                                        <div class="slide-box">
+                                            <p class="txt">
+                                                스와이퍼3
+                                            </p>
+                                            <div class="ico-area fn-ani-set" data-ani-item="sl-acc-begin3"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ui-slide-item swiper-slide">
+                                        <div class="slide-box">
+                                            <p class="txt">
+                                                스와이퍼4
+                                            </p>
+                                            <div class="ico-area fn-ani-set" data-ani-item="sl-acc-begin4"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ui-slide-item swiper-slide">
+                                        <div class="slide-box">
+                                            <p class="txt">
+                                                스와이퍼5
+                                            </p>
+                                            <div class="ico-area fn-ani-set" data-ani-item="sl-acc-begin5"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                        </div>
+                    </div>
+				</section>
+            </div>
+            <!--// 컨테이너 영역 -->
+        </div>
+    </body>
+
+    <script>
+        // $(function(){
+        //     $(document).ready(function(){
+        //         swiperLottieEvent();
+        //     });
+        // });
+
+        function swiperLottieEvent() {
+            let lottieTimeout;
+            let lottieArr = [];
+            // let isLottieArr = [];
+
+            accIntroSwiper = new Swiper('.acc-intro-swiper .ui-slide-wrap .slider', {
+                speed: 1000,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: false
+                },
+                on: {
+                    slideChange: function () {
+                        clearTimeout(lottieTimeout);
+                        lottieTimeout = setTimeout(() => playLottieAni(accIntroSwiper.realIndex), 400);
+                    }
+                }
+            });
+
+            function lottieAniSet() {
+                document.querySelectorAll('.acc-intro-swiper .fn-ani-set').forEach((el, idx) => {
+                    const lottie = lottieAnimation(el);
+                    lottieArr[idx] = lottie;
+
+                    const onLottieComplete = function () {
+                        console.log(`Lottie 완료 이벤트 실행: slide ${idx}`);
+                        if (accIntroSwiper.realIndex < accIntroSwiper.slides.length - 1) {
+                            accIntroSwiper.slideNext();
+                        }
+                    };
+
+                    if (onLottieComplete) {
+                        console.log(`기존 이벤트 제거: slide ${idx}`);
+                        lottie.removeEventListener('complete', onLottieComplete);  
+                    }
+                    lottie.addEventListener('complete', onLottieComplete);
+
+                    // if (!isLottieArr[idx]) {
+                    //     console.log(`새로운 이벤트 추가: slide ${idx}`);
+
+                    //     lottie.addEventListener('complete', onLottieComplete);
+                    //     // isLottieArr[idx] = true;
+                    // }
+                });
+            }
+
+            function lottieAniBackBtnInit() {
+                if ($('.page-accident .acc-intro-swiper').length) {
+                    $('.page-accident .btn-back').on('click', function () {
+                        let popstate = $(this).parents('.popstate');
+                        if (popstate.hasClass('current-step-2')) {
+                            accIntroSwiper.slideTo(0, 0);
+                            lottieArr[0].stop();
+                            lottieArr[0].play();
+                        }
+                    });
+                }
+            }
+
+            function playLottieAni(swiperIdx) {
+                lottieArr.forEach((el, idx) => {
+                    if (idx == swiperIdx) {
+                        el.play();
+                    } else {
+                        el.stop();
+                    }
+                });
+            }
+
+            // 초기 슬라이드 lottie 시작
+            setTimeout(() => {
+                accIntroSwiper.slideTo(0, 0);
+                playLottieAni(0);
+            }, 50);
+
+            lottieAniSet();
+            lottieAniBackBtnInit();
+        }
+
+        function lottieAnimation(el, opt){
+            if(el !== null && el != void 0 && el.lottieAni){
+                el.lottieAni.stop();
+                return el.lottieAni;
+            }
+
+            var options = assign({
+                loop: false,
+                speed: 1,
+                autoplay: false
+            }, opt);
+
+            var defaultPath = '/assets/js/animation/';
+            var fileName = el.dataset.aniItem;
+            var lottieAni = lottie.loadAnimation(_objectSpread2({
+                container: el,
+                path: "".concat(defaultPath).concat(fileName, ".json"),
+                renderer: 'svg'
+            }, options));
+
+            el.lottieAni = lottieAni;
+            return lottieAni;
+        }
+    </script>
+</html>

@@ -1,5 +1,11 @@
 /* common */
 $(function () {
+    if($('.btn-head-progress').length){
+        svgAniFn();
+    }
+});
+
+function svgAniFn(){
     const progress = $('.btn-head-progress');
     const circle = $('.btn-head-progress svg .circle');
     const bar = $('.btn-head-progress svg .bar');
@@ -51,7 +57,7 @@ $(function () {
     // const arcData = {
     //     x: 50, y: 50, radius: 40, degree: per
     // }
-});
+}
 
 // function d3Circle() {
 //     // input data
@@ -158,3 +164,104 @@ $(function () {
 //         .attr('stroke-dasharray', radius * 3.14 * 2)
 //         .attr('stroke-dashoffset', radius * 3.14 * 2);
 // }
+
+
+$(document).ready(function(){
+    swiperLottieEvent();
+});
+
+function swiperLottieEvent() {
+    let lottieTimeout;
+    let lottieAnimations = [];
+    // let isLottieArr = [];
+
+    accIntroSwiper = new Swiper('.acc-intro-swiper .ui-slide-wrap .slider', {
+        speed: 500,
+        pagination: {
+            el: '.swiper-pagination',
+            // clickable: true
+        },
+        on: {
+            slideChange: function () {
+                clearTimeout(lottieTimeout);
+                lottieTimeout = setTimeout(() => playLottieAni(accIntroSwiper.realIndex), 300);
+            }
+        }
+    });
+
+    function lottieAniSet() {
+        document.querySelectorAll('.acc-intro-swiper .fn-ani-set').forEach((el, idx) => {
+            const lottie = lottieAnimation(el); // 애니메이션 로드
+            lottieAnimations[idx] = lottie; // 애니메이션 배열에 저장
+
+            const onLottieComplete = function () {
+                console.log(`Lottie 완료 이벤트 실행: slide ${idx}`);
+                // 마지막 슬라이드인 경우 자동으로 슬라이드 넘기지 않도록 수정
+                if (accIntroSwiper.realIndex < accIntroSwiper.slides.length - 1) {
+                    accIntroSwiper.slideNext();
+                }
+            };
+
+            // 이미 리스너가 등록되어 있다면 제거하고 새로 추가
+            lottie.removeEventListener('complete', onLottieComplete);  
+            lottie.addEventListener('complete', onLottieComplete);
+        });
+    }
+
+    function lottieAniBackBtnInit() {
+        if ($('.page-accident .acc-intro-swiper').length) {
+            $('.page-accident .btn-back').on('click', function () {
+                let popstate = $(this).parents('.popstate');
+                if (popstate.hasClass('current-step-2')) {
+                    accIntroSwiper.slideTo(0, 0);
+                    lottieAnimations[0].stop();
+                    lottieAnimations[0].play();
+                }
+            });
+        }
+    }
+
+    function playLottieAni(swiperIdx) {
+        lottieAnimations.forEach((el, idx) => {
+            if (idx == swiperIdx) {
+                el.play();
+            } else {
+                el.stop();
+            }
+        });
+    }
+
+    // 초기 슬라이드에서 Lottie 애니메이션 시작
+    setTimeout(() => {
+        accIntroSwiper.slideTo(0, 0);
+        playLottieAni(0);
+    }, 50);
+
+    lottieAniSet(); // Lottie 애니메이션 초기화
+    lottieAniBackBtnInit(); // 뒤로가기 버튼 초기화
+}
+
+function lottieAnimation(el, opt){
+    if(el !== null && el != void 0 && el.lottieAni){
+        el.lottieAni.stop();
+        return el.lottieAni;
+    }
+
+    var options = Object.assign({
+        loop: false,
+        speed: 1,
+        autoplay: false
+    }, opt);
+
+    var defaultPath = '/assets/js/animation/';
+    var fileName = el.dataset.aniItem;
+    var lottieAni = lottie.loadAnimation({
+        container: el,
+        path: `${defaultPath}${fileName}.json`,
+        renderer: 'svg',
+        ...options
+    });
+
+    el.lottieAni = lottieAni;
+    return lottieAni;
+}
