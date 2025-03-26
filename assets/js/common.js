@@ -1,3 +1,5 @@
+let swiperInitialized = false; // ✅ 중복 실행 방지
+
 /* common */
 $(function () {
     if($('.btn-head-progress').length){
@@ -166,7 +168,10 @@ function svgAniFn(){
 // }
 
 
-$(document).ready(function(){
+// $(document).ready(function(){
+//     swiperLottieEvent();
+// });
+$(window).on('load', function(){
     swiperLottieEvent();
 });
 
@@ -183,8 +188,8 @@ function swiperLottieEvent() {
         },
         on: {
             slideChange: function () {
-                clearTimeout(lottieTimeout);
-                lottieTimeout = setTimeout(() => playLottieAni(accIntroSwiper.realIndex), 300);
+                if(lottieTimeout) clearTimeout(lottieTimeout);
+                lottieTimeout = setTimeout(() => playLottieAni(accIntroSwiper.realIndex), 100);
             }
         }
     });
@@ -195,7 +200,7 @@ function swiperLottieEvent() {
             lottieAnimations[idx] = lottie; // 애니메이션 배열에 저장
 
             const onLottieComplete = function () {
-                console.log(`Lottie 완료 이벤트 실행: slide ${idx}`);
+                console.log(`Lottie 완료 이벤트 실행: slide ${idx}`, lottie);
                 // 마지막 슬라이드인 경우 자동으로 슬라이드 넘기지 않도록 수정
                 if (accIntroSwiper.realIndex < accIntroSwiper.slides.length - 1) {
                     accIntroSwiper.slideNext();
@@ -224,21 +229,34 @@ function swiperLottieEvent() {
     function playLottieAni(swiperIdx) {
         lottieAnimations.forEach((el, idx) => {
             if (idx == swiperIdx) {
-                el.play();
+                if(!el.isPlaying){
+                    el.play();
+                    el.isPlaying = true;
+                }
             } else {
-                el.stop();
+                if(el.isPlaying){
+                    el.stop();
+                    el.isPlaying = false;
+                }
             }
         });
     }
 
     // 초기 슬라이드에서 Lottie 애니메이션 시작
     setTimeout(() => {
-        accIntroSwiper.slideTo(0, 0);
-        playLottieAni(0);
+        if (!swiperInitialized) {
+            accIntroSwiper.slideTo(0, 0);
+            playLottieAni(0);
+            swiperInitialized = true;
+        }
     }, 50);
-
+    
     lottieAniSet(); // Lottie 애니메이션 초기화
     lottieAniBackBtnInit(); // 뒤로가기 버튼 초기화
+
+    //수정
+    // accIntroSwiper.slideTo(0, 0);
+    // playLottieAni(0);
 }
 
 function lottieAnimation(el, opt){
@@ -263,5 +281,6 @@ function lottieAnimation(el, opt){
     });
 
     el.lottieAni = lottieAni;
+    el.isPlaying = false; //애니메이션 상태 추가
     return lottieAni;
 }
