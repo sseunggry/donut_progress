@@ -271,7 +271,7 @@ function lottieAnimation(el, opt){
         autoplay: false
     }, opt);
 
-    var defaultPath = '/assets/js/animation/';
+    var defaultPath = './assets/js/animation/';
     var fileName = el.dataset.aniItem;
     var lottieAni = lottie.loadAnimation({
         container: el,
